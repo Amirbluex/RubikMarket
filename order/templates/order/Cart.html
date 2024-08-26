@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}سبد خرید{% endblock %}
+
+{% block page_name %}cart{% endblock %}
+
+{% block page_hero_title %}سبد خرید{% endblock %}
+{% block page_hero_current %}سبد خرید{% endblock %}
+
+{% block main %}
+    <section class="inner-page" id="cart-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>سبد خرید</h1>
+                            <p>مدیریت و خرید همزمان چند محصول</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <div class="row">
+                        {% if cart %}
+                        <div class="col-12 col-lg-9">
+                            <div id="cart-products">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 py-3">
+                                            <div class="pb-3" id="return-to-shop">می‌خواهید محصولات دیگری اضافه کنید؟ <a href="{% url "product:product_list" %}">بازگشت به فروشگاه</a></div>
+                                            <div class="d-none d-md-block">
+                                                <div class="row my-2" id="heading">
+                                                    <div class="col-4">
+                                                        <div>کالا</div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div>قیمت واحد</div>
+                                                    </div>
+                                                    <div class="col-2 pl-4">
+                                                        <div>تعداد</div>
+                                                    </div>
+                                                    <div class="col-2 pr-0">
+                                                        <div class="pr-3">قیمت نهایی</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% for item in cart %}
+                                            <!-- Order Product Record -->
+                                            <div class="row product">
+                                                <div class="col-12 col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-2 col-md-4 pl-0">
+                                                            <img src="{{ item.product.image.url }}" alt="">
+                                                        </div>
+                                                        <div class="col-10 col-md-8">
+                                                            <a href="{% url "product:product_detail" item.product.id %}" target="_blank"><div class="title pt-2">{{ item.product.title }}</div></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-2">
+                                                    <div class="d-md-none font-weight-bold">قیمت</div>
+                                                    <div class="pt-1"><span class="product-encode4365gbf265g43d">{{ item.product.price }}</span> <span>تومان</span></div>
+                                                </div>
+                                                <div class="col-6 col-md-2 pl-4 pr-0 pr-md-3">
+                                                        <div class="d-md-none font-weight-bold">تعداد</div>
+                                                        <div class="pt-1 pr-2 bg-light"><span
+                                                                class="order-number">{{ item.quantity }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-2 pr-0">
+                                                        <div class="d-md-none font-weight-bold">قیمت نهایی</div>
+                                                        <div class="pt-1 pr-2 bg-light"><span
+                                                                class="product-total price">{{ item.total }} تومان</span>
+                                                        </div>
+                                                        <a href="{% url "order:cart_item_remove" item.product.id %}"
+                                                           class="product-remove btn-remove-from-basket"
+                                                           data-id="">
+                                                            <div class="product-remove btn-remove-from-basket"><i
+                                                                    class="fa fa-times"></i> حذف
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                            </div>
+                                            <hr>
+                                            <!-- Order Product Record -->
+                                            {% endfor %}
+                                            <div class="row product">
+                                                <div class="col-12">
+                                                    <a href="{% url 'order:cart_delete' %}" class="product-remove btn-remove-from-basket" data-id="all"><div class="float-end small pl-2 font-weight-bold">خالی کردن سبد</div></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="col-12 col-lg-3 mt-2 mt-lg-0 pr-3 pr-lg-0">
+                            <div id="factor">
+                                <div class="container">
+                                        <div class="row py-2">
+                                            <div class="col-6">
+                                                <div>جمع کل فاکتور:</div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div><span class="price"
+                                                           id="factor-total-encode4365gbf265g43d">{{ cart.total }} تومان</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row py-2">
+                                            <div class="col-6">
+                                                <div>هزینۀ ارسال و بسته بندی:</div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div><span class="price"
+                                                           id="factor-total-discount">درب منزل با مشتری </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row py-2 bg-light" id="total">
+                                            <div class="col-6">
+                                                <div>مبلغ قابل پرداخت:</div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div><span class="price"
+                                                           id="factor-total ">{{ cart.total }} تومان</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="row py-2">
+                                        <div class="col-12">
+                                            <a href="{% if request.user.is_authenticated %}{% url 'order:order_create' %}{% else %}/login{% endif %}"><input type="submit"
+                                                                                            value="ادامه ثبت سفارش"
+                                                                                            class="btn btn-success w-100"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Suggested Products -->
+                        <div class="col-12 pt-5" id="suggested-products">
+                            <div class="title py-3 text-center">سایر محصولات پیشنهادی</div>
+                            <div class="owl-carousel products-carousel">
+                                <!-- Product Item -->
+                                <div class="encode4326654321vfb item">
+                                    <a href="product.html"><div class="image" style="background-image: url('/statics/images/products/p102.png')"></div></a>
+                                    <div class="details p-3">
+                                        <div class="category">
+                                            <a href="products.html">گوشی موبایل</a>
+                                            &nbsp;/&nbsp;
+                                            <a href="products.html">سامسونگ</a>
+                                        </div>
+                                        <a href="product.html"><h2>گوشی موبایل سامسونگ مدل Galaxy A21s دو سیم کارت ظرفیت 128 گیگابایت</h2></a>
+                                        <div class="encode4365gbf265g43d">4.000.000 تومان</div>
+                                        <div class="rate">
+                                            <i class="fa fa-star-half-alt"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <span class="encode43bf265g43d">(14 رای دهنده)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Product Item -->
+                                <!-- Product Item -->
+                                <div class="encode4326654321vfb item">
+                                    <a href="product.html"><div class="image" style="background-image: url('/statics/images/products/p102.png')"></div></a>
+                                    <div class="details p-3">
+                                        <div class="category">
+                                            <a href="products.html">گوشی موبایل</a>
+                                            &nbsp;/&nbsp;
+                                            <a href="products.html">سامسونگ</a>
+                                        </div>
+                                        <a href="product.html"><h2>گوشی موبایل سامسونگ مدل Galaxy A21s دو سیم کارت ظرفیت 128 گیگابایت</h2></a>
+                                        <div class="encode4365gbf265g43d">4.000.000 تومان</div>
+                                        <div class="rate">
+                                            <i class="fa fa-star-half-alt"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <span class="encode43bf265g43d">(14 رای دهنده)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Product Item -->
+                            </div>
+                        </div>
+                        <!-- /Suggested Products -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+{% endblock %}

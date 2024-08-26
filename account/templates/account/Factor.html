@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<section class="inner-page" id="profile-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>ناحیه کاربری</h1>
+                            <p>به ناحیه کاربری روبیک مارکت خوش آمدید.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-12 col-lg-3">
+                            <!-- Side Panel -->
+                            {% include "account/Profile-sidebar.html" %}
+                            <!-- /Side Panel -->
+                        </div>
+                        {% if orders %}
+                        <div class="col-12 col-lg-9 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
+                            <!-- Factors Count -->
+                            <div class="custom-container" id="orders-status">
+                                <div class="container nowrap">
+                                    <div class="row py-2">
+                                        <div class="col-12 px-0">
+                                            <ul class="px-3">
+                                                <li>
+                                                    <a href="#" class="active">
+                                                        <span>در انتظار پرداخت</span>
+                                                        <div class="badge badge-secondary">1</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span>پرداخت شده</span>
+                                                        <div class="badge badge-secondary">2</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span>ارسال شده</span>
+                                                        <div class="badge badge-secondary">3</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span>تکمیل شده</span>
+                                                        <div class="badge badge-secondary">4</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Factors Count -->
+
+                            <!-- Factors List -->
+                            {% for order in orders %}
+                            <div class="custom-container mt-2 order">
+                                <div class="row pt-2 px-3">
+                                    <div class="col-12 col-sm-6"><h2>سفارش شماره #{{ order.ref_id }}</h2></div>
+                                    <div class="col-12 col-sm-6 text-sm-end"><span>{{ order.created_at }}</span> - <span>{{ order.status }}</span></div>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                    <div class="row py-2">
+                                        <div class="col-12">
+                                            <div>
+                                                <div class="header">
+                                                    <div class="total py-1"><span>مبلغ کل:</span> {{ order.total_price }} تومان</div>
+                                                </div>
+                                                <div class="container products px-0">
+                                                    <div class="row">
+                                                        {% for item in order.items.all %}
+                                                        <!-- Order Record -->
+                                                        <span class="col-12 col-sm-6 col-lg-4 col-xl-3 px-1">
+                                                            <a href="" target="_blank">
+                                                                <div class="encode4326654321vfb">
+                                                                    <div class="image" style="background-image: url({{ item.product.image.url }})"></div>
+                                                                    <div class="text-center px-1 px-sm-3">
+                                                                        <h2>{{ item.product.title }}</h2>
+                                                                        <div class="number">تعداد: {{ item.quantity }}</div>
+                                                                        <div class="encode4365gbf265g43d">مبلغ: {{ item.total_price }}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </span>
+                                                        <!-- /Order Record -->
+                                                            {% endfor %}
+                                                    </div>
+                                                </div>
+                                            <div class="row py-2">
+                                        <div class="col-12">
+                                            <a href="{% if request.user.is_authenticated %}{% url 'order:order_create' %}{% else %}/login{% endif %}"><input type="submit"
+                                                                                            value="ادامه ثبت سفارش"
+                                                                                            class="btn btn-success w-100"></a>
+                                        </div>
+                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- /Factors List -->
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

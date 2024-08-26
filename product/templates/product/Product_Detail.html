@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+    <section class="inner-page" id="product-page">
+        <div class="container-fluid" id="page-hero">
+            <div class="row">
+                <div class="col-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 px-0">
+                                <h1>{{ product.title }}</h1>
+                                <p>دارای قابلیت دو سیم کارته و حافظه 128 گیگا بایت</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-12 col-lg-5 px-lg-0">
+                                <div class="swiper-container gallery-top">
+                                    <!-- Additional required wrapper -->
+                                    <ul class="swiper-wrapper">
+                                        <!-- Slides -->
+
+                                        <li id="1" class="swiper-slide">
+                                            <a href="{{ product.image.url }}" itemprop="contentUrl" data-size="900x710">
+                                                <img src="{{ product.image.url }}" itemprop="thumbnail"
+                                                     alt="گوشی موبایل سامسونگ مدل Galaxy A21s"/>
+                                            </a>
+                                        </li>
+
+                                        <!-- /Slides -->
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="col-12 col-lg-7 mt-5 mt-lg-0 pl-lg-0" id="product-intro">
+                                <a href="product.html">
+                                    <h1>{{ product.title }}</h1>
+                                </a>
+                                <div class="encode4365gbf265g43d-container py-2">
+                                    <span class="pre-encode4365gbf265g43d"></span>
+                                    <span class="encode4365gbf265g43d">{{ product.price }} <span>تومان</span></span>
+                                    <div class="badge badge-danger font-weight-light m-1 py-1 px-2">10%</div>
+                                </div>
+                                <p>
+                                    {{ product.description }}
+                                </p>
+                                <hr>
+                                <div class="variables">
+                                    <div class="title">گزینه های موجود:</div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-4 col-lg-3">
+                                            <div class="variable">
+                                                <div class="sub-title pt-2 pb-3">رنگ</div>
+                                                <select name="" class="form-select">
+                                                    {% for color in product.color.all %}
+                                                    <option value="">{{color.title }} </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if object.stock > 0 %}
+                                <form method="post" action="{% url 'order:cart_add' object.pk %}">
+                                {% csrf_token %}
+                                <div class="variables">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-4 col-lg-3">
+                                            <div class="variable">
+                                                <div class="sub-title pt-2 pb-2">تعداد</div>
+                                                <input type="number" min="1" max="10" class="form-control" value="1"
+                                                       name="quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cta-container pt-3 pt-md-5">
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <button type="submit"
+                                                    class="btn btn-success px-4 px-lg-2 px-xl-4 btn-add-to-basket"><i
+                                                    class="fa fa-shopping-cart"></i> افزودن به سبد خرید
+                                            </button>
+                                            {% endif %}
+                                            <br class="d-sm-none">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                                <!-- Share Links -->
+                                <div class="pt-5" id="share-links">
+                                    <span>اشتراک گذاری: </span>
+                                    <a href="#" target="_blank"><span class="share-link"><img
+                                            src="{% static 'images/social/twitter.png' %}" alt="توئیتر"
+                                            width="18px"></span></a>
+                                    <a href="#" target="_blank"><span class="share-link"><img
+                                            src="{% static 'images/social/insta.png' %}" alt="اینستاگرام" width="18px"></span></a>
+                                    <a href="#" target="_blank"><span class="share-link"><img
+                                            src="{% static 'images/social/linkedin.png' %}" alt="لینکدین" width="18px"></span></a>
+                                    <a href="#" target="_blank"><span class="share-link"><img
+                                            src="{% static 'images/social/facebook.png' %}" alt="فیس بوک" width="18px"></span></a>
+                                </div>
+                                <!-- Share Links -->
+                            </div>
+
+                            <!-- Suggested Products -->
+                            <div class="col-12 pt-5" id="suggested-products">
+                                <div class="title py-3 text-center">محصولات مرتبط</div>
+                                <div class="owl-carousel products-carousel">
+                                    <!-- Product Item -->
+                                    <div class="encode4326654321vfb item">
+                                        <a href="product.html">
+                                            <div class="image"
+                                                 style="background-image: url('/statics/images/products/p303.png')"></div>
+                                        </a>
+                                        <div class="details p-3">
+                                            <div class="category">
+                                                <a href="products.html">گوشی موبایل</a>
+                                                &nbsp;/&nbsp;
+                                                <a href="products.html">سامسونگ</a>
+                                            </div>
+                                            <a href="product.html"><h2>مودم روتر ADSL2 Plus بی‌ سیم N300 دی-لینک مدل
+                                                DSL-2740U</h2></a>
+                                            <div class="encode4365gbf265g43d">3.000.000 تومان</div>
+                                            <div class="rate">
+                                                <i class="fa fa-star-half-alt"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <span class="encode43bf265g43d">(14 رای دهنده)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Product Item -->
+                                    <!-- Product Item -->
+                                    <div class="encode4326654321vfb item">
+                                        <a href="product.html">
+                                            <div class="image"
+                                                 style="background-image: url('/statics/images/products/p201.png')"></div>
+                                        </a>
+                                        <div class="details p-3">
+                                            <div class="category">
+                                                <a href="products.html">گوشی موبایل</a>
+                                                &nbsp;/&nbsp;
+                                                <a href="products.html">سامسونگ</a>
+                                            </div>
+                                            <a href="product.html"><h2>لپ تاپ 14 اینچی ایسوس مدل ZenBook UM433IQ -
+                                                A5023</h2></a>
+                                            <div class="encode4365gbf265g43d">5.000.000 تومان</div>
+                                            <div class="rate">
+                                                <i class="fa fa-star-half-alt"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <span class="encode43bf265g43d">(14 رای دهنده)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Product Item -->
+                                    <!-- Product Item -->
+                                    <div class="encode4326654321vfb item">
+                                        <a href="product.html">
+                                            <div class="image"
+                                                 style="background-image: url('/statics/images/products/p302.png')"></div>
+                                        </a>
+                                        <div class="details p-3">
+                                            <div class="category">
+                                                <a href="products.html">گوشی موبایل</a>
+                                                &nbsp;/&nbsp;
+                                                <a href="products.html">سامسونگ</a>
+                                            </div>
+                                            <a href="product.html"><h2>اسپیکر بلوتوثی قابل حمل تی اند جی مدل Tg-113</h2>
+                                            </a>
+                                            <div class="encode4365gbf265g43d">4.000.000 تومان</div>
+                                            <div class="rate">
+                                                <i class="fa fa-star-half-alt"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <span class="encode43bf265g43d">(14 رای دهنده)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Product Item -->
+                                    <!-- Product Item -->
+                                    <div class="encode4326654321vfb item">
+                                        <a href="product.html">
+                                            <div class="image"
+                                                 style="background-image: url('/statics/images/products/p203.png')"></div>
+                                        </a>
+                                        <div class="details p-3">
+                                            <div class="category">
+                                                <a href="products.html">گوشی موبایل</a>
+                                                &nbsp;/&nbsp;
+                                                <a href="products.html">سامسونگ</a>
+                                            </div>
+                                            <a href="product.html"><h2>لپ تاپ 15 اینچی ایسوس مدل VivoBook X543MA -
+                                                A</h2></a>
+                                            <div class="encode4365gbf265g43d">3.000.000 تومان</div>
+                                            <div class="rate">
+                                                <i class="fa fa-star-half-alt"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <span class="encode43bf265g43d">(14 رای دهنده)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Product Item -->
+                                </div>
+                            </div>
+                            <!-- /Suggested Products -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{% static "js/owl.carousel.min.js" %}"></script>
+    <script src="{% static "js/nav-tabs.js" %}"></script>
+    <script src="{% static "js/swiper-bundle.min.js" %}"></script>
+    <script src="../cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
+    <script src="../cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+    <script src="{% static "js/product-gallery.js" %}"></script>
+
+    <script src="{% static "js/scripts.js" %}"></script>
+{% endblock %}

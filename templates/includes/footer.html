@@ -1,0 +1,48 @@
+{% load static %}
+<div class="container">
+        <div class="row">
+            <div class="col-6 col-sm-4 col-lg-2">
+                <div class="title">گروه های محصولات</div>
+                <ul>
+                    {% for category in categories %}
+                    <li><a href="{% url "product:category_products" category.id %}"> {{ category.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-6 col-sm-4 col-lg-2 d-none d-sm-inline-block">
+                <div class="title">ناحیه کاربری</div>
+                <ul>
+                    <li><a href="{% url "account:user_login" %}">ورود به سایت</a></li>
+                    <li><a href="{% url "account:user_register" %}">عضویت در سایت</a></li>
+                    <li><a href="{% url "account:user_logout" %}">خروج از حساب کاربری</a></li>
+                    <li><a href="{% url "order:cart_detail" %}">سبد خرید</a></li>
+                    <li><a href="{% url "account:factors" %}">پیش فاکتور</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6">
+                <hr class="d-lg-none">
+                <img src="{% static 'images/logo.png' %}" alt=""> روبیک مارکت
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                <div class="row">
+                    <div class="col-12 col-md-6 text-center p-2" id="encode43vfbb65gtabfb">
+                        <div>7 روز هفته، 24 ساعت شبانه روز</div>
+                        <div>پاسخگوی شما هستیم</div>
+                        <div>09351234567</div>
+                    </div>
+                    <div class="col-12 col-md-6 pt-2 pt-md-0" id="encode43vfbbbfb">
+                        <div class="row">
+                            <div class="col-4 text-center">
+                                <a href="#"><img src="{% static 'images/encode43vfbbbfb/enamad.html' %}" alt=""></a>
+                            </div>
+                            <div class="col-4 text-center">
+                                <a href="#"><img src="{% static 'images/encode43vfbbbfb/samandehi.html' %}" alt=""></a>
+                            </div>
+                            <div class="col-4 text-center">
+                                <a href="#"><img src="{% static 'images/encode43vfbbbfb/etehadi' %}" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

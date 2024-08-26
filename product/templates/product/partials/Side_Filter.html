@@ -1,0 +1,37 @@
+<div class="accordion filters-container">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button py-2 px-3" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                گروه های محصولات
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                {% for category in categories %}
+                                                    <div class="form-group">
+                                                        <input type="checkbox" id="category1">
+                                                        <label for="category1"><a
+                                                                href="{% url 'product:category_products' category.id %}">{{ category.title }}</a></label>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion filters-container mt-3">
+                                    <div class="accordion-item">
+                                        <div id="collapseThree" class="accordion-collapse show"
+                                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body pb-2">
+                                                <div class="form-group">
+                                                    <input type="checkbox" id="only-available">
+                                                    <label for="only-available"><a href="{% url 'product:product_list' %}">فقط کالاهای موجود</a></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>

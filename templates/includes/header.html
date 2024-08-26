@@ -1,0 +1,103 @@
+{% load static %}
+ <!-- Top NavBar -->
+    <div id="encode4325436">
+        <div class="container">
+            <div class="row">
+                <div class="col-8 d-none d-md-block">
+                    <ul>
+                        <li><a href="{% url 'home:home' %}">صفحه نخست</a></li>
+                        <li><a href="about.html">درباره ما</a></li>
+                        <li><a href="contact.html">تماس با ما</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4 text-center text-md-end" id="top-encode43vfbb65gtabfb">
+                    <span>تلفن مشاوره و فروش: 09351234567</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Top NavBar -->
+    <!-- Search NavBar -->
+    <div id="encode43254bvfb">
+        <div class="container pt-1">
+            <div class="row py-3 align-content-center">
+                <div class="col-12 col-md-3 col-xl-2 text-center text-md-start pb-2" id="encode4326523bvfb">
+                    <a href="{% url 'home:home' %}">
+                        <img src="{% static 'images/logo.png' %}" alt=""> روبیک مارکت
+                    </a>
+                </div>
+                <div class="col-12 col-md-5 col-xl-6">
+                    <div id="search-bar">
+                        <i class="fa fa-search"></i>
+                        <input type="text" placeholder="جستجو کنید...">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="row">
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'account:user_profile' %}" class="col-12 col-md-7 col-lg-6 text-center" id="btn-login-register"> {{ request.user.fullname }}</a>
+                            {% else %}
+                        <div class="col-12 col-md-7 col-lg-6 text-center" id="btn-login-register">
+                            <a href="{% url 'account:user_login' %}">ورود</a> /
+                            <a href="{% url 'account:user_register' %}">عضویت</a>
+                        </div>
+                        {% endif %}
+                        <div class="col-12 col-md-5 col-lg-6">
+                            <a href="{% url "order:cart_detail" %}">
+                                <div class="btn btn-warning w-100"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="d-md-none d-lg-inline-block">سبد خرید</span></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Search NavBar -->
+    <!-- Main NavBar -->
+    <div id="main-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="droopmenu-navbar dmarrow-down droopmenu-horizontal dmpos-top dmfade">
+                        <div class="droopmenu-inner">
+                            <div class="droopmenu-header">
+                                <a href="#" class="droopmenu-toggle"><i class="dm-burg"></i></a>
+                                <span class="d-md-none">منوی فروشگاه</span>
+                            </div>
+                            <!-- Header Mega Menu-->
+                            <div class="droopmenu-nav">
+                                <div class="droopmenu-nav-wrap">
+                                    <div class="droopmenu-navi">
+                                        <ul class="droopmenu">
+                                            <li class="droopmenu-parent" aria-haspopup="true">
+                                                <a href="{% url "product:product_list" %}" aria-expanded="false"><i class="fa fa-bars"></i>&nbsp;&nbsp;گروه های محصولات<em class="droopmenu-topanim"></em></a><div class="dm-arrow"></div>
+                                                    <ul style="">
+                                                        {% for category in categories %}
+                                                    <li><a href="{% url "product:category_products" category.id %}">{{ category.title }}</a></li>
+                                                        {% endfor %}
+                                                    </ul>
+                                            </li>
+                                            <li class="droopmenu-parent" aria-haspopup="true">
+                                                <a href="{% url "account:factors" %}" aria-expanded="false">سفارشات<em class="droopmenu-topanim"></em></a><div class="dm-arrow"></div>
+                                            </li>
+                                            {% if request.user.is_authenticated %}
+                                            <li class="droopmenu-parent" aria-haspopup="true">
+                                                <a href="{% url "account:user_profile" %}" aria-expanded="false">پروفایل کاربری<em class="droopmenu-topanim"></em></a><div class="dm-arrow"></div>
+                                                <ul style="">
+                                                    <li><a href="{% url "account:user_profile" %}">مشخصات کاربری</a></li>
+                                                    <li><a href="{% url "account:user_logout" %}"> خروج از حساب</a></li>
+                                                </ul>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Header Menu Menu -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main NavBar -->

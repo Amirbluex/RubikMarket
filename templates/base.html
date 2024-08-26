@@ -1,0 +1,37 @@
+{% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+   {% include 'includes/head_links.html' %}
+</head>
+<body>
+<!-- Header -->
+<section id="header">
+    {% include 'includes/header.html' %}
+</section>
+<!-- /Header -->
+
+{% block main %}
+
+{% endblock %}
+
+
+<!-- Footer -->
+<section class="pt-4 pb-3" id="footer">
+    {% include 'includes/footer.html' %}
+</section>
+<!-- /Footer -->
+
+<!-- Copyright -->
+<section class="py-2" id="copyright">
+    {% include 'includes/copyright.html' %}
+</section>
+<!-- Copyright -->
+
+<!-- Scripts -->
+    {% include 'includes/footer_links.html' %}
+<!-- /Scripts -->
+</body>
+
+</html>

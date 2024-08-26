@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}مدیریت حساب{% endblock %}
+
+{% block page_name %}profile{% endblock %}
+
+{% block page_hero_title %}ناحیه کاربری{% endblock %}
+
+{% block page_hero_description %}به ناحیه کاربری خود خوش آمدید!{% endblock %}
+
+{% block page_hero_mid %}
+    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'accounts:user_profile' %}">ناحیه کاربری</a>
+    </li>{% endblock %}
+
+{% block page_hero_current %}پروفایل{% endblock %}
+
+{% block main %}
+<section class="inner-page" id="profile-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>حساب کاربری</h1>
+                            <p>به حساب کاربری خود در روبیک مارکت خوش آمدید.</p>
+                            <nav aria-label="breadcrumb">
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-12 col-lg-3">
+                            <!-- Side Panel -->
+                            {% include "account/Profile-sidebar.html" %}
+                            <!-- /Side Panel -->
+                        </div>
+                        <div class="col-12 col-lg-9 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
+                            <!-- Profile Fields -->
+                            <div class="custom-container bg-light" id="profile-fields">
+                                <div class="row pt-2 px-3 ">
+                                    <div class="col-12"><h1>اطلاعات شخصی</h1></div>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 profile-field py-2">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <div class="title">نام و نام خانوادگی</div>
+                                                    <div class="value">{{ request.user.fullname }}</div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="#" class="float-left" data-toggle="modal" data-target="#fullNameModal"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 profile-field py-2">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <div class="title">شماره تلفن همراه</div>
+                                                    <div class="value">{{ user.phone_number }}</div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="#" class="float-left" data-toggle="modal" data-target="#mobileModal"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 profile-field py-2">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <div class="title">پست الکترونیک</div>
+                                                    <div class="value">{{ user.email }}</div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="#" class="float-left" data-toggle="modal" data-target="#emailModal"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 profile-field py-2">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <div class="title">رمز عبور</div>
+                                                    <div class="value">******</div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <a href="#" class="float-left" data-toggle="modal" data-target="#passwordModal"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Profile Fields -->
+                            {% if last_order %}
+                            <!-- Latest Orders -->
+                            <div class="mt-2 order">
+                                <div class="row pt-2 px-3">
+                                    <div class="col-12"><h2>آخرین سفارش ها</h2></div>
+                                </div>
+                            </div>
+                            <div class="custom-container mt-2 order">
+                                <div class="row pt-2 px-3">
+                                    <div class="col-12 col-sm-6"><h2>سفارش شماره #{{ last_order.ref_id }}</h2></div>
+                                    <div class="col-12 col-sm-6 text-sm-end"><span>{{ last_order.created_at }}</span> - <span>{{ last_order.status }}</span></div>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                    <div class="row py-2">
+                                        <div class="col-12">
+                                            <div>
+                                                <div class="header">
+                                                    <div class="total py-1"><span>مبلغ کل:</span> {{ last_order.total_price }} تومان</div>
+                                                </div>
+                                                <div class="container products px-0">
+                                                    <div class="row">
+                                                        {% for item in last_order.items.all %}
+                                                        <!-- Order Record -->
+                                                        <span class="col-12 col-sm-6 col-lg-4 col-xl-3 px-1">
+                                                            <a href="../product.html" target="_blank">
+                                                                <div class="encode4326654321vfb">
+                                                                    <div class="image" style="background-image: url({{ item.product.image.url }})"></div>
+                                                                    <div class="text-center px-1 px-sm-3">
+                                                                        <h2>{{ item.product.title }}</h2>
+                                                                        <div class="number">تعداد: {{ item.quantity }} عدد</div>
+                                                                        <div class="encode4365gbf265g43d">مبلغ: {{ item.total_price }}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </span>
+                                                        <!-- /Order Record -->
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Latest Orders -->
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

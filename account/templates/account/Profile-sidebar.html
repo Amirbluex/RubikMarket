@@ -1,0 +1,64 @@
+{% load static %}
+<div class="accordion" id="side-panel">
+    <div class="accordion-item menu-container">
+        <h2 class="accordion-header">
+            <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseOne">
+                <span class="row">
+                    <span class="col-7 col-sm-8 col-lg-7 pt-0 pt-sm-2 pt-md-3 pt-lg-0 align-self-center">
+                        <div id="full-name">{{ request.user.fullname }}</div>
+                        <div class="mt-2" id="email-mobile">{{ user.phone_number }}</div>
+                    </span>
+                </span>
+            </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+             aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+                <ul>
+                    <li>
+                        <a href="{% url "account:user_profile" %}" class="active">
+                            <div>
+                                <div class="icon d-inline-block"><img
+                                        src="{% static "images/icons/profile-menu/profile.webp" %}" class="pl-2"></div>
+                                اطلاعات حساب
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url "account:factors" %}">
+                            <div>
+                                <div class="icon d-inline-block"><img
+                                        src="{% static "images/icons/profile-menu/orders.webp" %}" class="pl-2"></div>
+                                سفارش های من
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url "account:add_list_address" %}">
+                            <div>
+                                <div class="icon d-inline-block"><img
+                                        src="{% static "images/icons/profile-menu/addresses.webp" %}" class="pl-2">
+                                </div>
+                                آدرس های من
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr>
+                    </li>
+                    <li>
+                        <a href="{% url "account:user_logout" %}">
+                            <div>
+                                <div class="icon d-inline-block"><img
+                                        src="{% static "images/icons/profile-menu/exit.webp" %}" class="pl-2"></div>
+                                خروج از حساب
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

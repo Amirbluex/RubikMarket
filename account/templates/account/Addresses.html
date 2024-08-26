@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<section class="inner-page" id="profile-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>ناحیه کاربری</h1>
+                            <p>به ناحیه کاربری روبیک مارکت خوش آمدید.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-12 col-lg-3">
+                            <!-- Side Panel -->
+                            {% include "account/Profile-sidebar.html" %}
+                            <!-- /Side Panel -->
+                        </div>
+                        <div class="col-12 col-lg-9 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
+                            <!-- New Address Form -->
+                            <div class="custom-container mb-2" id="new-address">
+                                <div class="row pt-2 px-3">
+                                    <div class="col-12"><h1>افزودن آدرس جدید</h1></div>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 pt-3">
+                                            <div class="row">
+                                                 <form method="post" action="{% url 'account:add_list_address' %}">
+                                                    {% csrf_token %}
+                                                    {{ form.errors }}
+                                                    <div class="col-12 col-md-12 pl-2">
+                                                        <div class="form-group m-1">
+                                                            {{ form.address.label_tag }}
+                                                            {{ form.address }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 pl-2">
+                                                        <div class="form-group m-1">
+                                                            {{ form.postal_code.label_tag }}
+                                                            {{ form.postal_code }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 pl-2">
+                                                        <div class="form-group m-1">
+                                                            {{ form.receiver.label_tag }}
+                                                            {{ form.receiver }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 pl-2">
+                                                        <div class="form-group m-1">
+                                                            {{ form.phone.label_tag}}
+                                                            {{ form.phone }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group m-1 pb-3">
+                                                            <input type="submit" class="btn btn-primary px-5"
+                                                                   value="ذخیره آدرس">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /New Address Form -->
+
+                           <!-- User Addresses -->
+                            <div class="custom-container" id="addresses">
+                                <div class="row pt-2 px-3">
+                                    <div class="col-12"><h1>آدرس های من</h1></div>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                    <div class="row">
+                                        {% for address in addresses %}
+                                            <!-- Address Record -->
+                                            <div class="col-12 address py-2">
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-10">
+                                                        <div class="title">{{ address.address }}</div>
+                                                        <div class="sub-title">کد پستی: {{ address.postal_code }}</div>
+                                                        <div class="sub-title">نام و نام خانوادگی گیرنده: {{ address.receiver }}</div>
+                                                        <div class="sub-title">شماره تماس گیرنده: {{ address.phone }}</div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-2 text-lg-end">
+                                                        <a href="{% url 'account:remove_address' address.id %}"
+                                                           onclick="return confirm('آیا جهت حذف این آدرس اطمینان دارید؟')"
+                                                           class="float-right float-sm-left pr-2 pl-sm-2"><i
+                                                                class="fa fa-trash-alt font-weight-normal"></i></a>
+                                                        <a href="#" class="float-right float-sm-left"><i
+                                                                class="fa fa-edit font-weight-normal"></i></a>
+
+                                                            {% if address.is_active %}
+                                                                <span class="float-right float-sm-left ml-2"
+                                                           title="آدرس پیش فرض">
+                                                                <i class="fa fa-check-circle"
+                                                                   style="color: #fcb941"></i>
+                                                                </span>
+                                                            {% else %}
+                                                                <a href="{% url 'account:set_active_address' address.id %}" class="float-right float-sm-left ml-2"
+                                                           title="آدرس پیش فرض">
+                                                                <i class="fa fa-circle-notch"></i>
+                                                                </a>
+                                                            {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Address Record -->
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /User Addresses -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
